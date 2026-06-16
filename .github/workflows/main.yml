@@ -28,4 +28,3 @@ jobs:
           path: |
             resume_ru.pdf
             resume_eng.pdf
-          archive: false
