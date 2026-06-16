@@ -1,0 +1,28 @@
+name: Build CV
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build --tag cv-builder .
+
+      - name: Compile PDF
+        run: |
+          docker run --name cv-container cv-builder
+          docker cp cv-container:/app/resume_ru.pdf ./resume_ru.pdf
+          docker cp cv-container:/app/resume_eng.pdf ./resume_eng.pdf
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v7
+        with:
+          name: cv-pdf
+          path: |
+            resume_ru.pdf
+            resume_eng.pdf
+          archive: false
