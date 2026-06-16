@@ -1,4 +1,5 @@
-FROM debian:10.8
+# через choose_system.py должен был быть debian:10.8, но он чет в ошибках сыпался, жаловлася на репы, поэтому я выбрал базу
+FROM ubuntu:20.04
 LABEL authors="Danila_Shurygin"
 
 ENV DEBIAN_FRONTEND=noninteractive
